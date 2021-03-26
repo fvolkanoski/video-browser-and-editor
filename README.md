@@ -5,6 +5,7 @@ Simple video browser and editor. It can preview videos, edit them with 3 element
 ## Requirements
 - The project has been built and tested on Desktop Qt 5.12.2 GCC 64 bit (but it will probably work on any platform).
 - QtAV 1.6
+- QtAV requires FFmpeg >= 1.0 / Libav >= 9.0
 - OpenCV 4.0
 
 # Installation
