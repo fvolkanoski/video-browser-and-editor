@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MainMenu/MainMenuItem.qml</file>
+        <file>VideoMenu/VideoMenuItem.qml</file>
+        <file>EditVideos/EditWindow.qml</file>
+    </qresource>
+</RCC>
