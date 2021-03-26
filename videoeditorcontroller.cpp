@@ -51,9 +51,25 @@ void VideoEditorController::endRecord() {
 
 void VideoEditorController::extractVideoSound(QString videoName)
 {
-//    QProcess process;
-//    process.start("ffmpeg -i " + QDir::toNativeSeparators("/home/desktop/videos/sample.mp4") + " -f mp3 -ab 192000 -vn " + QDir::toNativeSeparators("/home/desktop/videos/edited/bunny.mp3"));
-//    qDebug() << process.isOpen();
-//    process.waitForFinished();
-//    qDebug() << process.readAll();
+    QString extract = "ffmpeg -i " + VIDEOS_DIR + videoName + " -f mp3 -ab 192000 -vn " + EDITED_VIDEOS_DIR + videoName + ".mp3",
+            import = "ffmpeg -i " + EDITED_VIDEOS_DIR + videoName.split(".")[0] + ".avi" + " -i " + EDITED_VIDEOS_DIR + videoName + ".mp3" + " -c copy -map 0:v:0 -map 1:a:0 " + EDITED_VIDEOS_DIR + "new_" + videoName.split(".")[0] + ".avi",
+            remove_old_video = "rm " + EDITED_VIDEOS_DIR + videoName.split(".")[0] + ".avi",
+            remove_sound_file = "rm " + EDITED_VIDEOS_DIR + videoName + ".mp3",
+            add_new = "mv " + EDITED_VIDEOS_DIR + "new_" + videoName.split(".")[0] + ".avi" + " " + EDITED_VIDEOS_DIR + videoName.split(".")[0] + ".avi",
+            remove_script = "rm " + VIDEOS_DIR + videoName + ".sh";
+
+
+    QFile file(VIDEOS_DIR + videoName + ".sh");
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+
+    QTextStream out(&file);
+    out << extract << "\n"
+        << import << "\n"
+        << remove_old_video << "\n"
+        << add_new << "\n"
+        << remove_sound_file << "\n"
+        << remove_script;
+
+    file.close();
 }

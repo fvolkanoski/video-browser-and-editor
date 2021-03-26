@@ -159,8 +159,6 @@ Window {
                     editWindow.videoPath = "file://" + modelData
                     editWindow.videoThumbPath = videoLoader.getVideoThumbnail(modelData.split('\\').pop().split('/').pop(), false);
                     editWindow.visible = true
-
-                    videoEditor.extractVideoSound("videoName");
                 }
 
                 // Wait in case thumbnails are still generated.
